@@ -63,5 +63,4 @@ target/
 
 # data file
 *.csv
-*.png
 *.tif
