@@ -1,0 +1,93 @@
+# Methodology for the marine wilderness analysis
+
+---
+## The data
+
+The [cumulative marine pressure](http://www.nature.com/ncomms/2015/150714/ncomms8615/full/ncomms8615.html) data (hereafter referred to as *the Marine Data* unless otherwise specified) was used as the aggregated indicator for wilderness in the marine realm. It summarises impacts to the marine environment globally based on a set of 19 factors up to 2013, including fishing, climate change, land-based stressors. This layer represents the best globally consistent marine cumulative pressure at a high resolution of 1 $km^2$.
+
+We used the Marine Ecoregions and Pelagic Provinces of the World as the classification basis for assessing cumulative marine pressure, a proxy for wilderness area in the marine realm. Provinces, as opposed to ecoregions, were chosen due to its suitable size for the identification of gaps and prioritisation. This also aligns with the other IUCN thematic studies ([REF:to thematic](#))
+
+## The methods
+
+Given the explorative nature of this analysis, i.e., the pressure threshold value under which marine areas are considered wilderness areas needs to be tried and tested, and that this value may change, it is therefore imperative a sustainable method be utilised so that upon the change of such a threshold, subsequent iterations/calculations require minimal repetitions of analysis, especially spatial analysis that are usually costly in time and prone to error.
+
+- **Input spatial data**
+
+    With the potential change in threshold value in mind, the input data were prepared as follows:
+    - the Marine Data
+    - within the bounds of the EEZ, compilation of a *synthesized* biogeography layer that incorporates the MEOW ([Marine Ecoregion of the World](http://bioscience.oxfordjournals.org/content/57/7/573.abstract)), up to 200 meter depth, MEOW up to 200 nautical miles, and [Pelagic Provinces](http://nora.nerc.ac.uk/18017/). The reason behind creating such a layer is to defer the decision of which base units to group (for example, identifying gaps in MEOW or Pelagic or anything with EEZ regardless) at a later stage. This resulted in a new dataset of spatially disjoint boundaries with shared attributes. More details can be found in the [detailed methodology notebook](./wilderness_analysis.ipynb). Antarctica was removed from the resulting dataset, where the World Heritage Convention does not currently apply. 
+    - the marine subset of natural World Heritage sites (47 sites)
+
+- **Clipping rasters**
+
+    Each feature of the above biogeography data was programatically used to clip a part of the Marine Data based on its spatial extent. The clipped raster data was then converted into a flattened one dimensional array to facilitate numerical calculations to derive statistics. The same set of steps were applied for the marine World Heritage sites and its intersection with the biogeography data.
+    
+    
+- **Exploring thresholds**
+
+    The threshold of classifying marine wilderness value was determined by using the 10 percentile value for all marine areas within EEZ. We chose this empirical threshold by comparing threshold values at 1, 3, 5, and 10 percentiles, and examining distribution of wilderness extent with existing marine World Heritage sites, and the 10% threshold was decided as it reasonably highlights areas of marine wilderness in accordance with expert knowledge.
+
+
+- **Small multiples**
+
+    After multiplying the cell size for each qualifying pixel (as defined by the threshold) within each feature and summarising over all such pixels, we calculated the total wilderness area of the feature. Similarly, by grouping different features under the same province (or WH site), the total wilderness area and its percentage in relation to the province could be easily computed without running any spatial analysis. 
+
+Step by step analysis is included in the [detailed methodology notebook](./wilderness_analysis.ipynb)
+
+##  Observations of preliminary result
+
+### Global distribution of marine wilderness within EEZ 
+
+The distribution of marine wilderness is uneven and reflects the distribution of pressures across the oceans cumulatively.
+
+[map: overall dist marine pressure](#)
+
+Thanks to difficulties in navigation due to multi-year ice, the Arctic region has the largest marine wilderness, covering a total of 5.4 million $km^2$, and also represents one of the highest percentage coverage in all marine provinces. This includes 3.3 million $km^2$ of waters within the near-shore Arctic province (continental shelf, up to 200 meter depth), which accounts for almost half (47.9%) of the entire marine province, and more than 2 million $km^2$ beyond the continental shelf and within the EEZ boundary, i.e., 58.9% of its pelagic province. It presents the largest contiguous waters with a significant wilderness coverage. 
+
+Polynesia (including Central Polynesia, Southeast Polynesia, and Marquesas), Sahul Shelf, Tropical East Pacific, Subantarctic Islands, Southern New Zealand and Subantarctic New Zealand, also contain substantial marine wilderness area within their boundaries (each more than 200,000 $km^2$). 
+
+Polynesia contains large expanses of wilderness outside its continental shelf: most of Central Polynesia's 1.2 million marine wilderness area are located in the South Central Pacific (736,941 $km^2$, 21.4%) and Equatorial Pacific (414.471 $km^2$, 34.0%) pelagic provinces and, similarly, wilderness in Southeast Polynesia owes much of its area to the South Central Pacific pelagic province (469,159 $km^2$, 8.2%). With 502,141 $km^2$ out of its total pelagic province of 737,640 $km^2$ identified as wilderness, Marquesas ranks the highest in proportion (68.1%). 
+
+Similar to Polynesia, having relatively little continental shelf, Subantarctic Islands host significant wilderness area in the pelagic waters, including the Antarctic (153,549 $km^2$, 44.7%), Subantarctic (170,448 $km^2$, 49.2%) and Antarctic Polar Front (630,631 $km^2$, 55.0%) provinces. 
+
+The same can be observed for Subantarctic New Zealand region, where large pelagic provinces such as Subantarctic, Southern Subtropical Front, Antarctic Polar Front cover 313,650 $km^2$ (66.1%), 170,773 $km^2$ (74.0%) and 19,671 $km^2$ (56.5%) respectively.
+
+Measuring a wilderness area of 288,274 $km^2$ (21.9%) within its continental shelf, Sahul Shelf is second largest to the Arctic region in terms of near-shore wilderness.
+
+[map:highlight regions/meow of high wildernss](#)
+
+### Marine wilderness inside current natural WH sites
+
+Wilderness area already exist in marine WH sites and those containing marine components in good numbers. For example, the Great Barrier Reef, off the east coast of Australia, has overall the largest marine wilderness area in all natural WH sites (78,310 $km^2$, 22.7% of its total marine area). Phoenix Islands Protected Area, the largest WH site in the world, covers a considerable 23,432 $km^2$ of wilderness areas in the pelagic province of Central Polynesia. Overall, ten natural WH sites contain more than 1,000 $km^2$ wilderness area inside their boundaries, out of 33 sites that overlap with marine wilderness area, according to the spatial analysis.
+
+While the actual amount of marine wilderness in each site is an important indicator, the percentage of its marine wilderness area may provide another useful indication of the degree to which how significant these vast wilderness areas are captured in relation to their own size. For instance, in the Subantarctic Islands region, the Macquarie Island, 95.4% of its 5,396.7 $km^2$ waters lie almost entirely within wilderness area in the Antarctic Polar Front pelagic province. In the Arctic province, the Natural System of Wrangel Island Reserve occupies a significant area of 7,200 $km^2$ and this amounts to 59.7% of its total marine area). 
+
+[table:export wh wilderness csv](#)
+
+As can be seen in the analysis (see [map](#) below), the majority of marine WH sites (33 out of 47) contain, to varying degrees, some marine wilderness areas already inside their designated boundaries, indicating some element of the wilderness value have been accepted and reflected by the Convention already, albeit implicitly. It, however, also highlights the fact vast wilderness areas locate beyond the current distribution of marine WH sites that may host potential OUVs. There is a need to consistently recognise such value and provide a systematic framework to identify and prioritise marine areas where such value may reside. Next we combine what have been analysed so far and further examine marine wilderness within each marine province that are covered by existing WH sites, and seek to identify those provinces that host large wilderness that have little WH coverage.
+
+[map:wh overlay marine pressure](#) 
+
+
+### Gap analysis of marine wilderness WH sites
+
+Currently, 30 of the 62 marine provinces are home to at least one marine WH site. Both the Tropical East Pacific and the Northern European Seas have four sites and five provinces: Subantarctic Island, Western Indian Ocean, Warm Temperate Northeast Pacific, Tropical Southwestern Pacific and Weste Central Australian Shelf have two each. The remaining 32 sites, including Marquesas, Sahul Shelf, and Southeast Polynesia, host no marine WH sites in its wilderness area. 
+
+[table: export_gap_meow_province](#)
+
+However, numbers alone is a rather poor indicator as it fails to take into consideration the actual overlap of wilderness area within each province. In fact, having a WH in a province does not automatically suggest its wilderness value in that marine region has been captured. As we have identified, in some of the provinces, marine WH sites over very little wilderness area. For example, Tropical East Pacific, though having four WH sites, has a small coverage of 0.5%. Arctic has one WH site (Natural System of Wrangle Island), but it makes less than 0.01% of its total wilderness areas. On the other end of the spectrum, WH sites cover almost entirely those in the West Central Australian Shelf and the Northeast Australian Shelf (97.4% and 82.1% respectively).
+
+## Caveats
+
+As mentioned earlier, the cumulative marine pressure dataset is at best a proxy for wilderness. The definition of wilderness requires XXXXXX [DEF: wilderness](#) and no data has been nor in our opinion will be developed specifically to address wilderness in the marine environment. The nature of a global datasets determines that it will not capture every nuance of pressure or threat exhaustively that may invalidate the definition of marine wilderness in the context of World Heritage.
+
+Nevertheless, with these shortcomings in mind, our analysis offers a useful framework to illustrate how data driven approaches can be employed to provide insight into how global gaps can be identified consistently and how, when better data become available, it can be improved to offer greater accuracy and higher resolution.
+
+To compensate for deficiencies in global datasets and in the use of proxy, it will be important to use an expert driven system that can emphasis and target specific, relevant attributes of wilderness values.
+
+The results and gaps identified here remain indicative and should not be interpreted as the
+
+
+![dist-map](dist_EEZ.png)
+THe overlay of existing marine World Heritage sites and marine wilderness areas. It seems quite apparent that large part of the existing wilderness is not covered...
+![dist-map-wh](dist_eez_wh.png)
