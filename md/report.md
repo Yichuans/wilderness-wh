@@ -84,13 +84,13 @@ As can be seen in the analysis (see [map](#) below), 36 of 47 marine WH sites, c
 
 ![map:wh overlay marine pressure](mm_wh_overlap.png) 
 
-[legenditem: WH legend keys](#)
+[map legend: wh overlay](./writing/wh_legend.csv)
 
 For example, the Great Barrier Reef, off the east coast of Australia, has overall the largest marine wilderness area in all natural WH sites (78,310 $km^2$, 22.7% of its total marine area). Phoenix Islands Protected Area, the largest WH site in the world, covers a considerable 23,432 $km^2$ of wilderness areas in the pelagic province of Central Polynesia. Overall, ten natural WH sites contain more than 1,000 $km^2$ wilderness area inside their boundaries, out of 33 sites that overlap with marine wilderness area, according to the spatial analysis.
 
 While the actual amount of marine wilderness in each site is an important indicator, the percentage of its marine wilderness area may provide another useful indication of the degree to which how significant these vast wilderness areas are captured in relation to their own size. For instance, in the Subantarctic Islands region, the Macquarie Island, 95.4% of its 5,396.7 $km^2$ waters lie almost entirely within wilderness area in the Antarctic Polar Front pelagic province. In the Arctic province, the Natural System of Wrangel Island Reserve occupies a significant area of 7,200 $km^2$ and this amounts to 59.7% of its total marine area). 
 
-[table:export wh wilderness csv](#)
+[table: export wh wilderness csv](./writing/export_wh_wilderness.xlsx)
 
 There is a need to consistently recognise such value and provide a systematic framework to identify and prioritise marine areas where such value may reside. Next we combine what have been analysed so far and further examine marine wilderness within each province that having existing marine WH sites, and seek to identify those provinces that host large wilderness that have little WH coverage.
 
@@ -100,7 +100,7 @@ Currently, 30 of the 62 marine provinces are home to at least one marine WH site
 
 The remaining 32 provinces, including Marquesas, Sahul Shelf, and Southeast Polynesia, host no marine WH sites and present obvious gaps in its wilderness area.
 
-[table: export_gap_meow_province](#)
+[table: export_gap_meow_province](./writing/export_gap_meow_province.xlsx)
 
 However, numbers alone is a rather poor indicator as it fails to take into consideration the actual overlap of wilderness area within each province. In contrast, having a WH in a province does not automatically suggest its wilderness area in that marine region has been captured. As we have identified, in some of the provinces, marine WH sites cover very little wilderness area. For example, Tropical East Pacific, though having four WH sites, has a small combined coverage of 0.5%. Arctic has one WH site (Natural System of Wrangle Island), but it makes less than 0.01% of its total wilderness areas. On the other end of the spectrum, some WH sites may cover entire provinces, for instance, sites in the West Central Australian Shelf and the Northeast Australian Shelf (97.4% and 82.1% respectively).
 
